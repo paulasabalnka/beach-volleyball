@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Beach Volleyball Live Scores</title>
+  <title>Ho-ho-ho Holiday Beachvolly Tournament</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
@@ -26,9 +27,9 @@
       font-size: 0.95rem;
     }
     .subtitle {
-      color: #666;
-      margin-bottom: 0.8rem;
-      font-size: 0.8rem;
+      color:#666;
+      margin-bottom:0.8rem;
+      font-size:0.8rem;
     }
     table {
       border-collapse: collapse;
@@ -44,12 +45,10 @@
       text-align: center;
     }
     th {
-      background: #f0f0f3;
-      font-weight: 600;
+      background:#f0f0f3;
+      font-weight:600;
     }
-    tr:nth-child(even) {
-      background: #fafafa;
-    }
+    tr:nth-child(even) { background:#fafafa; }
     input[type="number"] {
       width: 60px;
       padding: 6px 4px;
@@ -58,45 +57,23 @@
       border-radius: 4px;
       border: 1px solid #bbb;
     }
-    .court-barszczyk {
-      background: #e3f0ff;
-    }
-    .court-makowiec {
-      background: #e6ffea;
-    }
-    .winner-a {
-      background: #d8ffd8 !important;
-    }
-    .winner-b {
-      background: #ffe3e3 !important;
-    }
-    .draw-row {
-      background: #fff9d6 !important;
-    }
-    .standings-table th {
-      background: #e2e2ff;
-    }
-    .small {
-      font-size: 0.75rem;
-      color: #555;
-    }
-    .layout {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .court-barszczyk { background:#e3f0ff; }
+    .court-makowiec { background:#e6ffea; }
+    .winner-a { background:#d8ffd8 !important; }
+    .winner-b { background:#ffe3e3 !important; }
+    .draw-row { background:#fff9d6 !important; }
+    .standings-table th { background:#e2e2ff; }
+    .small { font-size:0.75rem; color:#555; }
+    .layout { display:flex; flex-direction:column; gap:10px; }
     .card {
-      background: #fff;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-      margin-bottom: 0.8rem;
+      background:#fff; padding:10px; border-radius:8px;
+      box-shadow:0 1px 4px rgba(0,0,0,0.06); margin-bottom:0.8rem;
     }
-    @media (min-width: 900px) {
+    @media (min-width:900px) {
       .layout {
-        display: grid;
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
-        gap: 16px;
+        display:grid;
+        grid-template-columns:minmax(0,2fr) minmax(0,1.5fr);
+        gap:16px;
       }
     }
   </style>
@@ -104,14 +81,14 @@
 <body>
   <h1>Beach Volleyball Live Scores</h1>
   <div class="subtitle">
-    Mixed & boys-only schedule. Works offline. Scores auto-save on this device.
+    Mixed & boys-only schedule (ideal rotation). Works offline. Scores auto-save on this device.
   </div>
 
   <div class="layout">
     <div>
       <div class="card">
         <h2>Matches</h2>
-        <p class="small">Tap the score boxes and type points for each team.</p>
+        <p class="small">Tap score boxes and type points for each team.</p>
         <table id="matches-table">
           <thead>
             <tr>
@@ -174,12 +151,7 @@
   </div>
 
 <script>
-const players = [
-  "Chiara","Claudia","Pauli","Justyna",
-  "Karol","Michał Nowo","Michał","Ziółek","Robert",
-  "Marek","Marcin","Rafał","Paweł","Michał S"
-];
-
+const players = ['Chiara', 'Claudia', 'Pauli', 'Justyna', 'Karol', 'Michał Nowo', 'Michał', 'Ziółek', 'Robert', 'Marek', 'Marcin', 'Rafał', 'Paweł', 'Michał S'];
 const gender = {
   "Chiara": "F",
   "Claudia": "F",
@@ -196,43 +168,12 @@ const gender = {
   "Paweł": "M",
   "Michał S": "M"
 };
-
-const rounds = [
-  [1,"Barszczyk",["Chiara","Karol"],["Claudia","Michał Nowo"]],
-  [1,"Makowiec",["Marcin","Paweł"],["Michał","Ziółek"]],
-  [2,"Barszczyk",["Chiara","Robert"],["Marek","Pauli"]],
-  [2,"Makowiec",["Claudia","Rafał"],["Justyna","Michał S"]],
-  [3,"Barszczyk",["Justyna","Michał Nowo"],["Karol","Pauli"]],
-  [3,"Makowiec",["Marcin","Ziółek"],["Marek","Robert"]],
-  [4,"Barszczyk",["Chiara","Michał"],["Claudia","Rafał"]],
-  [4,"Makowiec",["Justyna","Michał S"],["Pauli","Paweł"]],
-  [5,"Barszczyk",["Chiara","Michał Nowo"],["Claudia","Karol"]],
-  [5,"Makowiec",["Marek","Robert"],["Michał","Paweł"]],
-  [6,"Barszczyk",["Chiara","Ziółek"],["Marcin","Pauli"]],
-  [6,"Makowiec",["Claudia","Michał S"],["Justyna","Rafał"]],
-  [7,"Barszczyk",["Justyna","Karol"],["Michał Nowo","Pauli"]],
-  [7,"Makowiec",["Marcin","Michał S"],["Marek","Robert"]],
-  [8,"Barszczyk",["Chiara","Michał"],["Claudia","Ziółek"]],
-  [8,"Makowiec",["Justyna","Paweł"],["Pauli","Rafał"]],
-  [9,"Barszczyk",["Chiara","Karol"],["Claudia","Michał"]],
-  [9,"Makowiec",["Marek","Ziółek"],["Michał Nowo","Robert"]],
-  [10,"Barszczyk",["Chiara","Marcin"],["Pauli","Rafał"]],
-  [10,"Makowiec",["Claudia","Paweł"],["Justyna","Michał S"]],
-  [11,"Barszczyk",["Justyna","Michał"],["Karol","Pauli"]],
-  [11,"Makowiec",["Marcin","Michał Nowo"],["Marek","Robert"]],
-  [12,"Barszczyk",["Karol","Marcin"],["Paweł","Rafał"]],
-  [12,"Makowiec",["Michał","Ziółek"],["Michał S","Robert"]],
-  [13,"Barszczyk",["Marek","Michał"],["Michał Nowo","Paweł"]],
-  [13,"Makowiec",["Marcin","Ziółek"],["Michał S","Rafał"]],
-  [14,"Barszczyk",["Marek","Robert"],["Michał Nowo","Michał S"]],
-  [14,"Makowiec",["Karol","Paweł"],["Rafał","Ziółek"]]
-];
-
+const rounds = [[1, 'Barszczyk', ['Chiara', 'Michał Nowo'], ['Claudia', 'Ziółek']], [1, 'Makowiec', ['Pauli', 'Robert'], ['Justyna', 'Michał']], [2, 'Barszczyk', ['Karol', 'Michał'], ['Robert', 'Marek']], [2, 'Makowiec', ['Marcin', 'Rafał'], ['Paweł', 'Michał S']], [3, 'Barszczyk', ['Chiara', 'Michał S'], ['Pauli', 'Karol']], [3, 'Makowiec', ['Claudia', 'Paweł'], ['Justyna', 'Marcin']], [4, 'Barszczyk', ['Karol', 'Michał Nowo'], ['Michał', 'Ziółek']], [4, 'Makowiec', ['Robert', 'Marek'], ['Marcin', 'Rafał']], [5, 'Barszczyk', ['Chiara', 'Rafał'], ['Claudia', 'Marek']], [5, 'Makowiec', ['Pauli', 'Michał Nowo'], ['Justyna', 'Karol']], [6, 'Barszczyk', ['Paweł', 'Michał S'], ['Karol', 'Michał Nowo']], [6, 'Makowiec', ['Michał', 'Robert'], ['Ziółek', 'Marek']], [7, 'Barszczyk', ['Chiara', 'Michał'], ['Claudia', 'Robert']], [7, 'Makowiec', ['Pauli', 'Rafał'], ['Justyna', 'Ziółek']], [8, 'Barszczyk', ['Marcin', 'Paweł'], ['Rafał', 'Michał S']], [8, 'Makowiec', ['Karol', 'Michał'], ['Michał Nowo', 'Ziółek']], [9, 'Barszczyk', ['Chiara', 'Marek'], ['Justyna', 'Michał S']], [9, 'Makowiec', ['Claudia', 'Marcin'], ['Pauli', 'Paweł']], [10, 'Barszczyk', ['Robert', 'Marcin'], ['Marek', 'Rafał']], [10, 'Makowiec', ['Paweł', 'Karol'], ['Michał S', 'Michał Nowo']], [11, 'Barszczyk', ['Chiara', 'Ziółek'], ['Pauli', 'Marek']], [11, 'Makowiec', ['Claudia', 'Michał Nowo'], ['Justyna', 'Robert']], [12, 'Barszczyk', ['Michał', 'Robert'], ['Ziółek', 'Marek']], [12, 'Makowiec', ['Marcin', 'Paweł'], ['Rafał', 'Michał S']], [13, 'Barszczyk', ['Chiara', 'Karol'], ['Justyna', 'Paweł']], [13, 'Makowiec', ['Claudia', 'Rafał'], ['Pauli', 'Michał S']], [14, 'Barszczyk', ['Chiara', 'Marcin'], ['Pauli', 'Ziółek']], [14, 'Makowiec', ['Claudia', 'Michał'], ['Justyna', 'Michał Nowo']]];
 const matchesTableBody = document.querySelector("#matches-table tbody");
 const standingsAllBody   = document.querySelector("#standings-all tbody");
 const standingsWomenBody = document.querySelector("#standings-women tbody");
 const standingsMenBody   = document.querySelector("#standings-men tbody");
-const STORAGE_KEY = "vb_scores_mixed_boys_v1";
+const STORAGE_KEY = "vb_scores_new_ideal_v1";
 
 function renderMatches() {
   matchesTableBody.innerHTML = "";
@@ -392,5 +333,3 @@ renderMatches();
 </script>
 </body>
 </html>
-
-
