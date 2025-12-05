@@ -104,7 +104,7 @@
 <body>
   <h1>Beach Volleyball Live Scores</h1>
   <div class="subtitle">
-    Works offline. Enter scores for each match. App auto-saves on this device.
+    Mixed & boys-only schedule. Works offline. Scores auto-save on this device.
   </div>
 
   <div class="layout">
@@ -134,22 +134,15 @@
       <div class="card">
         <h2>Standings</h2>
         <p class="small">
-          Sorted by: Wins ↓, Point diff ↓, Points for ↓.
-          Split by gender below.
+          Sorted by: Wins ↓, Point diff ↓, Points for ↓. Split by gender.
         </p>
 
         <h3>All players</h3>
         <table id="standings-all" class="standings-table">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Player</th>
-              <th>M</th>
-              <th>W</th>
-              <th>L</th>
-              <th>For</th>
-              <th>Agst</th>
-              <th>Diff</th>
+              <th>#</th><th>Player</th><th>M</th><th>W</th><th>L</th>
+              <th>For</th><th>Agst</th><th>Diff</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -159,14 +152,8 @@
         <table id="standings-women" class="standings-table">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Player</th>
-              <th>M</th>
-              <th>W</th>
-              <th>L</th>
-              <th>For</th>
-              <th>Agst</th>
-              <th>Diff</th>
+              <th>#</th><th>Player</th><th>M</th><th>W</th><th>L</th>
+              <th>For</th><th>Agst</th><th>Diff</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -176,14 +163,8 @@
         <table id="standings-men" class="standings-table">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Player</th>
-              <th>M</th>
-              <th>W</th>
-              <th>L</th>
-              <th>For</th>
-              <th>Agst</th>
-              <th>Diff</th>
+              <th>#</th><th>Player</th><th>M</th><th>W</th><th>L</th>
+              <th>For</th><th>Agst</th><th>Diff</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -192,277 +173,224 @@
     </div>
   </div>
 
-  <script>
-    const players = [
-      "Chiara","Claudia","Pauli","Justyna",
-      "Karol","Michał Nowo","Michał","Ziółek","Robert",
-      "Marek","Marcin","Rafał","Paweł","Michał S"
-    ];
+<script>
+const players = [
+  "Chiara","Claudia","Pauli","Justyna",
+  "Karol","Michał Nowo","Michał","Ziółek","Robert",
+  "Marek","Marcin","Rafał","Paweł","Michał S"
+];
 
-    const gender = {
-      "Chiara": "F",
-      "Claudia": "F",
-      "Pauli": "F",
-      "Justyna": "F",
-      "Karol": "M",
-      "Michał Nowo": "M",
-      "Michał": "M",
-      "Ziółek": "M",
-      "Robert": "M",
-      "Marek": "M",
-      "Marcin": "M",
-      "Rafał": "M",
-      "Paweł": "M",
-      "Michał S": "M"
+const gender = {
+  "Chiara": "F",
+  "Claudia": "F",
+  "Pauli": "F",
+  "Justyna": "F",
+  "Karol": "M",
+  "Michał Nowo": "M",
+  "Michał": "M",
+  "Ziółek": "M",
+  "Robert": "M",
+  "Marek": "M",
+  "Marcin": "M",
+  "Rafał": "M",
+  "Paweł": "M",
+  "Michał S": "M"
+};
+
+const rounds = [
+  [1,"Barszczyk",["Chiara","Karol"],["Claudia","Michał Nowo"]],
+  [1,"Makowiec",["Marcin","Paweł"],["Michał","Ziółek"]],
+  [2,"Barszczyk",["Chiara","Robert"],["Marek","Pauli"]],
+  [2,"Makowiec",["Claudia","Rafał"],["Justyna","Michał S"]],
+  [3,"Barszczyk",["Justyna","Michał Nowo"],["Karol","Pauli"]],
+  [3,"Makowiec",["Marcin","Ziółek"],["Marek","Robert"]],
+  [4,"Barszczyk",["Chiara","Michał"],["Claudia","Rafał"]],
+  [4,"Makowiec",["Justyna","Michał S"],["Pauli","Paweł"]],
+  [5,"Barszczyk",["Chiara","Michał Nowo"],["Claudia","Karol"]],
+  [5,"Makowiec",["Marek","Robert"],["Michał","Paweł"]],
+  [6,"Barszczyk",["Chiara","Ziółek"],["Marcin","Pauli"]],
+  [6,"Makowiec",["Claudia","Michał S"],["Justyna","Rafał"]],
+  [7,"Barszczyk",["Justyna","Karol"],["Michał Nowo","Pauli"]],
+  [7,"Makowiec",["Marcin","Michał S"],["Marek","Robert"]],
+  [8,"Barszczyk",["Chiara","Michał"],["Claudia","Ziółek"]],
+  [8,"Makowiec",["Justyna","Paweł"],["Pauli","Rafał"]],
+  [9,"Barszczyk",["Chiara","Karol"],["Claudia","Michał"]],
+  [9,"Makowiec",["Marek","Ziółek"],["Michał Nowo","Robert"]],
+  [10,"Barszczyk",["Chiara","Marcin"],["Pauli","Rafał"]],
+  [10,"Makowiec",["Claudia","Paweł"],["Justyna","Michał S"]],
+  [11,"Barszczyk",["Justyna","Michał"],["Karol","Pauli"]],
+  [11,"Makowiec",["Marcin","Michał Nowo"],["Marek","Robert"]],
+  [12,"Barszczyk",["Karol","Marcin"],["Paweł","Rafał"]],
+  [12,"Makowiec",["Michał","Ziółek"],["Michał S","Robert"]],
+  [13,"Barszczyk",["Marek","Michał"],["Michał Nowo","Paweł"]],
+  [13,"Makowiec",["Marcin","Ziółek"],["Michał S","Rafał"]],
+  [14,"Barszczyk",["Marek","Robert"],["Michał Nowo","Michał S"]],
+  [14,"Makowiec",["Karol","Paweł"],["Rafał","Ziółek"]]
+];
+
+const matchesTableBody = document.querySelector("#matches-table tbody");
+const standingsAllBody   = document.querySelector("#standings-all tbody");
+const standingsWomenBody = document.querySelector("#standings-women tbody");
+const standingsMenBody   = document.querySelector("#standings-men tbody");
+const STORAGE_KEY = "vb_scores_mixed_boys_v1";
+
+function renderMatches() {
+  matchesTableBody.innerHTML = "";
+  rounds.forEach((m,index)=>{
+    const [round,court,teamA,teamB] = m;
+    const tr = document.createElement("tr");
+    tr.classList.add(court === "Barszczyk" ? "court-barszczyk" : "court-makowiec");
+    tr.innerHTML = `
+      <td>${round}</td>
+      <td>${court}</td>
+      <td>${teamA.join(" + ")}</td>
+      <td><input type="number" min="0" inputmode="numeric" data-role="scoreA" data-idx="${index}"></td>
+      <td>${teamB.join(" + ")}</td>
+      <td><input type="number" min="0" inputmode="numeric" data-role="scoreB" data-idx="${index}"></td>
+      <td data-role="winner"></td>
+      <td data-role="diff"></td>
+    `;
+    matchesTableBody.appendChild(tr);
+  });
+
+  document.querySelectorAll("input[data-role]").forEach(inp=>{
+    inp.addEventListener("input", ()=>{ updateAll(); saveScores(); });
+  });
+
+  loadScores();
+}
+
+function saveScores() {
+  try {
+    const scores = [...matchesTableBody.rows].map(row=>{
+      const a = row.querySelector('input[data-role="scoreA"]').value;
+      const b = row.querySelector('input[data-role="scoreB"]').value;
+      return {a,b};
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+  } catch(e) {
+    console.warn("Cannot save",e);
+  }
+}
+
+function loadScores() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const scores = JSON.parse(raw);
+    [...matchesTableBody.rows].forEach((row,idx)=>{
+      const obj = scores[idx];
+      if (!obj) return;
+      const inputA = row.querySelector('input[data-role="scoreA"]');
+      const inputB = row.querySelector('input[data-role="scoreB"]');
+      if (obj.a !== undefined && obj.a !== "") inputA.value = obj.a;
+      if (obj.b !== undefined && obj.b !== "") inputB.value = obj.b;
+    });
+  } catch(e) {
+    console.warn("Cannot load",e);
+  }
+  updateAll();
+}
+
+function updateAll() {
+  const stats = {};
+  players.forEach(p=>{
+    stats[p] = {
+      player:p,
+      gender:gender[p] || "M",
+      matches:0,
+      wins:0,
+      losses:0,
+      ptsFor:0,
+      ptsAgainst:0
     };
+  });
 
-    const rounds = [
-      [1, "Barszczyk", ["Chiara","Ziółek"], ["Pauli","Paweł"]],
-      [1, "Makowiec", ["Claudia","Karol"], ["Justyna","Rafał"]],
+  [...matchesTableBody.rows].forEach(row=>{
+    row.classList.remove("winner-a","winner-b","draw-row");
+  });
 
-      [2, "Barszczyk", ["Claudia","Michał S"], ["Michał Nowo","Marek"]],
-      [2, "Makowiec", ["Marcin","Michał"], ["Paweł","Robert"]],
+  [...matchesTableBody.rows].forEach((row,idx)=>{
+    const [round,court,teamA,teamB] = rounds[idx];
+    const inputA = row.querySelector('input[data-role="scoreA"]');
+    const inputB = row.querySelector('input[data-role="scoreB"]');
+    const winnerCell = row.querySelector('td[data-role="winner"]');
+    const diffCell = row.querySelector('td[data-role="diff"]');
+    const sA = inputA.value === "" ? null : parseInt(inputA.value,10);
+    const sB = inputB.value === "" ? null : parseInt(inputB.value,10);
+    winnerCell.textContent = "";
+    diffCell.textContent = "";
 
-      [3, "Barszczyk", ["Michał S","Karol"], ["Justyna","Michał Nowo"]],
-      [3, "Makowiec", ["Marek","Robert"], ["Rafał","Ziółek"]],
-
-      [4, "Barszczyk", ["Chiara","Marek"], ["Michał","Pauli"]],
-      [4, "Makowiec", ["Karol","Robert"], ["Marcin","Paweł"]],
-
-      [5, "Barszczyk", ["Chiara","Michał S"], ["Rafał","Michał Nowo"]],
-      [5, "Makowiec", ["Claudia","Michał"], ["Marcin","Pauli"]],
-
-      [6, "Barszczyk", ["Claudia","Michał"], ["Justyna","Paweł"]],
-      [6, "Makowiec", ["Karol","Ziółek"], ["Rafał","Robert"]],
-
-      [7, "Barszczyk", ["Chiara","Marcin"], ["Pauli","Michał S"]],
-      [7, "Makowiec", ["Justyna","Michał Nowo"], ["Marek","Ziółek"]],
-
-      [8, "Barszczyk", ["Chiara","Paweł"], ["Claudia","Karol"]],
-      [8, "Makowiec", ["Justyna","Michał S"], ["Michał","Pauli"]],
-
-      [9, "Barszczyk", ["Chiara","Marek"], ["Justyna","Marcin"]],
-      [9, "Makowiec", ["Karol","Michał Nowo"], ["Robert","Ziółek"]],
-
-      [10, "Barszczyk", ["Claudia","Robert"], ["Pauli","Rafał"]],
-      [10, "Makowiec", ["Michał S","Michał"], ["Rafał","Marek"]],
-
-      [11, "Barszczyk", ["Chiara","Marcin"], ["Claudia","Rafał"]],
-      [11, "Makowiec", ["Michał Nowo","Paweł"], ["Robert","Ziółek"]],
-
-      [12, "Barszczyk", ["Justyna","Marcin"], ["Pauli","Karol"]],
-      [12, "Makowiec", ["Ziółek","Paweł"], ["Marek","Michał Nowo"]],
-
-      [13, "Barszczyk", ["Claudia","Marcin"], ["Michał S","Michał"]],
-      [13, "Makowiec", ["Karol","Rafał"], ["Marek","Ziółek"]],
-
-      [14, "Barszczyk", ["Chiara","Robert"], ["Justyna","Michał"]],
-      [14, "Makowiec", ["Michał S","Michał Nowo"], ["Pauli","Paweł"]],
-    ];
-
-    const matchesTableBody = document.querySelector("#matches-table tbody");
-    const standingsAllBody   = document.querySelector("#standings-all tbody");
-    const standingsWomenBody = document.querySelector("#standings-women tbody");
-    const standingsMenBody   = document.querySelector("#standings-men tbody");
-
-    const STORAGE_KEY = "vb_scores_michalS_v1";
-
-    function renderMatches() {
-      matchesTableBody.innerHTML = "";
-      rounds.forEach((m, index) => {
-        const [round, court, teamA, teamB] = m;
-
-        const tr = document.createElement("tr");
-        tr.dataset.matchIndex = index;
-        tr.classList.add(court === "Barszczyk" ? "court-barszczyk" : "court-makowiec");
-
-        const tdRound = document.createElement("td");
-        tdRound.textContent = round;
-
-        const tdCourt = document.createElement("td");
-        tdCourt.textContent = court;
-
-        const tdTeamA = document.createElement("td");
-        tdTeamA.textContent = teamA.join(" + ");
-
-        const tdScoreA = document.createElement("td");
-        const inputA = document.createElement("input");
-        inputA.type = "number";
-        inputA.min = "0";
-        inputA.inputMode = "numeric";
-        inputA.dataset.role = "scoreA";
-        tdScoreA.appendChild(inputA);
-
-        const tdTeamB = document.createElement("td");
-        tdTeamB.textContent = teamB.join(" + ");
-
-        const tdScoreB = document.createElement("td");
-        const inputB = document.createElement("input");
-        inputB.type = "number";
-        inputB.min = "0";
-        inputB.inputMode = "numeric";
-        inputB.dataset.role = "scoreB";
-        tdScoreB.appendChild(inputB);
-
-        const tdWinner = document.createElement("td");
-        tdWinner.dataset.role = "winner";
-
-        const tdDiff = document.createElement("td");
-        tdDiff.dataset.role = "diff";
-
-        tr.appendChild(tdRound);
-        tr.appendChild(tdCourt);
-        tr.appendChild(tdTeamA);
-        tr.appendChild(tdScoreA);
-        tr.appendChild(tdTeamB);
-        tr.appendChild(tdScoreB);
-        tr.appendChild(tdWinner);
-        tr.appendChild(tdDiff);
-
-        matchesTableBody.appendChild(tr);
-
-        inputA.addEventListener("input", () => { updateAll(); saveScores(); });
-        inputB.addEventListener("input", () => { updateAll(); saveScores(); });
+    if (Number.isInteger(sA) && Number.isInteger(sB)) {
+      const diff = sA - sB;
+      diffCell.textContent = diff;
+      teamA.forEach(p=>{
+        stats[p].matches += 1;
+        stats[p].ptsFor  += sA;
+        stats[p].ptsAgainst += sB;
       });
-
-      loadScores();
-    }
-
-    function saveScores() {
-      try {
-        const scores = [...matchesTableBody.rows].map(row => {
-          const a = row.querySelector('input[data-role="scoreA"]').value;
-          const b = row.querySelector('input[data-role="scoreB"]').value;
-          return { a, b };
-        });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
-      } catch (e) {
-        console.warn("Cannot save scores:", e);
+      teamB.forEach(p=>{
+        stats[p].matches += 1;
+        stats[p].ptsFor  += sB;
+        stats[p].ptsAgainst += sA;
+      });
+      if (sA > sB) {
+        winnerCell.textContent = "A";
+        row.classList.add("winner-a");
+        teamA.forEach(p=>stats[p].wins++);
+        teamB.forEach(p=>stats[p].losses++);
+      } else if (sB > sA) {
+        winnerCell.textContent = "B";
+        row.classList.add("winner-b");
+        teamB.forEach(p=>stats[p].wins++);
+        teamA.forEach(p=>stats[p].losses++);
+      } else {
+        winnerCell.textContent = "=";
+        row.classList.add("draw-row");
       }
     }
+  });
 
-    function loadScores() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return;
-        const scores = JSON.parse(raw);
-        [...matchesTableBody.rows].forEach((row, idx) => {
-          const obj = scores[idx];
-          if (!obj) return;
-          const inputA = row.querySelector('input[data-role="scoreA"]');
-          const inputB = row.querySelector('input[data-role="scoreB"]');
-          if (obj.a !== undefined && obj.a !== null && obj.a !== "") inputA.value = obj.a;
-          if (obj.b !== undefined && obj.b !== null && obj.b !== "") inputB.value = obj.b;
-        });
-      } catch (e) {
-        console.warn("Cannot load scores:", e);
-      }
-      updateAll();
-    }
+  const statsArr = Object.values(stats).map(s=>({
+    ...s,
+    diff: s.ptsFor - s.ptsAgainst
+  }));
 
-    function updateAll() {
-      const stats = {};
-      players.forEach(p => {
-        stats[p] = {
-          player: p,
-          gender: gender[p] || "M",
-          matches: 0,
-          wins: 0,
-          losses: 0,
-          ptsFor: 0,
-          ptsAgainst: 0,
-        };
-      });
+  statsArr.sort((a,b)=>{
+    if (b.wins !== a.wins) return b.wins - a.wins;
+    if (b.diff !== a.diff) return b.diff - a.diff;
+    if (b.ptsFor !== a.ptsFor) return b.ptsFor - a.ptsFor;
+    return a.player.localeCompare(b.player,'pl');
+  });
 
-      [...matchesTableBody.rows].forEach(row => {
-        row.classList.remove("winner-a","winner-b","draw-row");
-      });
+  function renderStandings(tbody, filterFn) {
+    tbody.innerHTML = "";
+    let rank = 1;
+    statsArr.forEach(s=>{
+      if (filterFn && !filterFn(s)) return;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${rank++}</td>
+        <td>${s.player}</td>
+        <td>${s.matches}</td>
+        <td>${s.wins}</td>
+        <td>${s.losses}</td>
+        <td>${s.ptsFor}</td>
+        <td>${s.ptsAgainst}</td>
+        <td>${s.diff}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
 
-      [...matchesTableBody.rows].forEach((row, idx) => {
-        const match = rounds[idx];
-        const [round, court, teamA, teamB] = match;
-        const inputA = row.querySelector('input[data-role="scoreA"]');
-        const inputB = row.querySelector('input[data-role="scoreB"]');
-        const winnerCell = row.querySelector('td[data-role="winner"]');
-        const diffCell = row.querySelector('td[data-role="diff"]');
+  renderStandings(standingsAllBody, null);
+  renderStandings(standingsWomenBody, s=>s.gender === "F");
+  renderStandings(standingsMenBody,   s=>s.gender === "M");
+}
 
-        const sA = inputA.value === "" ? null : parseInt(inputA.value, 10);
-        const sB = inputB.value === "" ? null : parseInt(inputB.value, 10);
-
-        winnerCell.textContent = "";
-        diffCell.textContent = "";
-
-        if (Number.isInteger(sA) && Number.isInteger(sB)) {
-          const diff = sA - sB;
-          diffCell.textContent = diff;
-
-          teamA.forEach(p => {
-            stats[p].matches += 1;
-            stats[p].ptsFor += sA;
-            stats[p].ptsAgainst += sB;
-          });
-          teamB.forEach(p => {
-            stats[p].matches += 1;
-            stats[p].ptsFor += sB;
-            stats[p].ptsAgainst += sA;
-          });
-
-          if (sA > sB) {
-            winnerCell.textContent = "A";
-            row.classList.add("winner-a");
-            teamA.forEach(p => stats[p].wins += 1);
-            teamB.forEach(p => stats[p].losses += 1);
-          } else if (sB > sA) {
-            winnerCell.textContent = "B";
-            row.classList.add("winner-b");
-            teamB.forEach(p => stats[p].wins += 1);
-            teamA.forEach(p => stats[p].losses += 1);
-          } else {
-            winnerCell.textContent = "=";
-            row.classList.add("draw-row");
-          }
-        }
-      });
-
-      const statsArr = Object.values(stats).map(s => ({
-        ...s,
-        diff: s.ptsFor - s.ptsAgainst
-      }));
-
-      statsArr.sort((a,b) => {
-        if (b.wins !== a.wins) return b.wins - a.wins;
-        if (b.diff !== a.diff) return b.diff - a.diff;
-        if (b.ptsFor !== a.ptsFor) return b.ptsFor - a.ptsFor;
-        return a.player.localeCompare(b.player, 'pl');
-      });
-
-      function renderStandings(tbody, filterFn) {
-        tbody.innerHTML = "";
-        let rank = 1;
-        statsArr.forEach(s => {
-          if (filterFn && !filterFn(s)) return;
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${rank++}</td>
-            <td>${s.player}</td>
-            <td>${s.matches}</td>
-            <td>${s.wins}</td>
-            <td>${s.losses}</td>
-            <td>${s.ptsFor}</td>
-            <td>${s.ptsAgainst}</td>
-            <td>${s.diff}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-      }
-
-      renderStandings(standingsAllBody, null);
-      renderStandings(standingsWomenBody, s => s.gender === "F");
-      renderStandings(standingsMenBody, s => s.gender === "M");
-    }
-
-    renderMatches();
-  </script>
+renderMatches();
+</script>
 </body>
 </html>
+
 
